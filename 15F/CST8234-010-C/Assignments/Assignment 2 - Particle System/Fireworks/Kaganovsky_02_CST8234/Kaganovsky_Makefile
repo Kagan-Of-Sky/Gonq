@@ -1,0 +1,27 @@
+CC = gcc
+
+
+LINKFLAGS = -lGL -lGLU -lglut -lm
+
+
+CFLAGS = -Wall -ansi -pedantic -O3
+
+
+OBJECTS  = Kaganovsky_particle.o
+OBJECTS += Kaganovsky_particles.o
+
+
+EXECUTABLE = fireworks
+
+
+build: $(OBJECTS)
+	$(CC) -o $(EXECUTABLE) $(OBJECTS) $(CFLAGS) $(LINKFLAGS)
+
+Kaganovsky_particle.o: Kaganovsky_particle.h Kaganovsky_particle.c Kaganovsky_particles.h
+	$(CC) -c Kaganovsky_particle.c $(CFLAGS)
+
+Kaganovsky_particles.o: Kaganovsky_particles.h Kaganovsky_particles.c Kaganovsky_particle.h
+	$(CC) -c Kaganovsky_particles.c $(CFLAGS)
+
+clean:
+	rm *.o

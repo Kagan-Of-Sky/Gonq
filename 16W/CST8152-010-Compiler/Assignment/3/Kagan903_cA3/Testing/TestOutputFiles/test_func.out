@@ -1,0 +1,43 @@
+--------IMPORTANT--------
+  These tests will only display something if the test fails.
+  If nothing is displayed then the test has succeeded.
+
+
+Testing invalid symbol table:
+
+
+
+Filling up symbol table:
+Symbol table after installing symbols:
+LINE      PLEX  STATUS_FIELD
+   0      int1  FFFC
+   1      int2  FFFC
+   2    float1  FFFA
+   3    float2  FFFA
+   4     str1#  FFFF
+
+
+
+Testing type updating:
+
+
+
+Testing updating type more than once:
+Symbol table after updating types:
+LINE      PLEX  STATUS_FIELD
+   0      int1  FFFC
+   1      int2  FFFB
+   2    float1  FFFA
+   3    float2  FFFD
+   4     str1#  FFFF
+
+
+
+Testing invalid ranges:
+
+
+
+Testing update value:
+
+
+

@@ -1,0 +1,62 @@
++ Put origin of data at memory address 0x1000
++ Put origin of program instructions at address 0x2000
+
++ In order to calculate the following: ($25 + $37 - $1 = $5B) 0x25 + 0x37 - 0x1 = 0x5B
+	- Pseudocode
+		0. Set origins of code and data
+			o Data at origin $1000 (0x1000).
+			o Code at origin $2000 (0x2000).
+		1. LOAD      Accumulator A with the value at address $1000 (0x1000)
+		2. ADD       the value in the accumulator with the value at address $1000 (0x1000)
+		3. DECREMENT the value in the accumulator.
+		4. STORE     the value in the accumulator into memory address $1000 (0x1000).
+		
+	- Actual code
+		; First.asm
+		;
+		; Author:              Mark Kaganovsky
+		; Student Number:      040-789-903
+		; Date:                17 Oct 15
+		; 
+		; Purpose:             Perform the following calculation: $25 + $37 - $15
+		; 
+		
+		; Labels (symbols defining a value) are always places in column 1.
+			; Labels are NOT case sensitive
+			; Labels can be followed by an optional colon (:).
+		
+		; Data.
+				org        $1000       ; Set the current location to the starts of RAM.
+		p:      db         $25         ; First addend is at location p.                 (memory address $1001)
+		q:      db         $37         ; Second addend is at location q.                (memory address $1002)
+		r:      ds         1           ; Sum will be stored at location r.              (memory address $1003)
+		
+		; Code.
+				org        $2000       ; Set the current location to the start of ROM.
+				ldaa       p           ; Load value of p into accumulator a.
+				adaa       q           ; Add the value in accumulator a to the value of q.
+				deca                   ; Decrement accumulator a.
+				staa       r           ; Store a in memory location r.
+				end                    ; End program.
+
+
+Instructions Used:
+	+ org: Set the current location of RAM
+		- Start of data: $1000 (0x1000).
+		- Start of program code: $2000 (0x2000).
+		- !!! NOT AN HCS12 INSTRUCTION, it is an assembler directive.
+	+ db: Define Byte
+		- Reserves one byte of memory and initializes it to a user specified value.
+		- !!! NOT AN HCS12 INSTRUCTION, it is an assembler directive.
+	+ ds: Define Storage
+		- This is the preferred way of defining a memory location whos value is either changing or not known.
+		- !!! NOT AN HCS12 INSTRUCTION, it is an assembler directive.
+	+ ldaa: Load Accumulator A 
+		- Load accumulator A with a value from a memory location.
+	+ adda: Add to accumulator A
+		- Add the value in accumulator A to a value in memory, store the result in accumulator A.
+	+ deca: Decrement accumulator A
+	+ staa: Store Accumulator A
+		- Store the value in accumulator A into a location in RAM.
+	+ end: Marks the end of the assembly language program to the assembler.
+		- !!! NOT AN HCS12 INSTRUCTION, it is an assembler directive.

@@ -1,0 +1,33 @@
+
+as12, an absolute assembler for Motorola MCU's, version 1.2h
+
+                        ; First.asm
+                        ;
+                        ; Author:              Mark Kaganovsky
+                        ; Student Number:      040-789-903
+                        ; Date:                17 Oct 15
+                        ;
+                        ; Purpose:             Perform the following calculation: $25 + $37 - $15
+                        ;
+                        
+                        ; Labels (symbols defining a value) are always places in column 1.
+                            ; Labels are NOT case sensitive
+                            ; Labels can be followed by an optional colon (:).
+                        
+                        ; Data.
+1000                            org        $1000       ; Set the current location to the starts of RAM.
+1000 25                 p:      db         $25         ; First addend is at location p.                 (memory address $1001)
+1001 37                 q:      db         $37         ; Second addend is at location q.                (memory address $1002)
+1002                    r:      ds         1           ; Sum will be stored at location r.              (memory address $1003)
+                        
+                        ; Code.
+2000                            org        $2000       ; Set the current location to the start of ROM.
+2000 b6 10 00                   ldaa       p           ; Load value of p into accumulator a.
+2003 bb 10 01                   adda       q           ; Add the value in accumulator a to the value of q.
+2006 43                         deca                   ; Decrement accumulator a.
+2007 7a 10 02                   staa       r           ; Store a in memory location r.
+                                end                    ; End program.
+
+Executed: Sat Oct 17 16:23:38 2015
+Total cycles: 13, Total bytes: 12
+Total errors: 0, Total warnings: 0

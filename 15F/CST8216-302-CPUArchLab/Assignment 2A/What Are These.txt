@@ -1,0 +1,11 @@
+.asm    Source Code File
+
+.lst    'List File'
+        Contains a listing of the machine code which the assembler generated and their equivelant statements.
+
+.s19    'Motorola s record'
+        This file will be used by the simulator and the hardware board to run our code.
+        It is similiar to a bytecode file which is produced by Java. This bytecode is interpreted.
+
+.sym    Symbol-Address table file.
+        Lists the labels which were used in the program and their memory addresses.

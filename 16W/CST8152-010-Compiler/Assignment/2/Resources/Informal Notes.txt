@@ -1,0 +1,73 @@
+Platypus language:
+
+
+
+
+A platypus program:
+	PLATYPUS{ ... }
+
+
+
+
+Comments:
+	!< This is a comment, it is terminated by a line terminator. Comments may appear anywhere.
+
+
+
+
+Numeric Types:
+	Integer -- 2 bytes.
+	           Always signed.
+	Rational - 4 bytes.
+	           Represented internally as floating point.
+	           Always signed.
+	Literal -- zero or positive only.
+	
+	           Legal decimal (base 10) literals: 0, 109, 17100, 
+	                                             32768 (legal decimal representation but illegal as a value for integer literals)
+	           Illegal decimal literals: 00, 0097
+	
+	           Legal octal literals: 00, 01, 07, 010(8), 012, 077777(32767),
+	                                          0177777(65535, legal octal representation but not legal for integer literal)
+	
+	           Illegal octal literals: 001, 087, 0797.
+	
+	           Note that the integer value of 0 has 2 representations: 0 (decimal) and 00 (octal)
+	
+	           Legal FPL (floating point literal): 0.010, 0., 1., 880., 7.7
+	           Illegal FPL: 01.0, 002.0, 00.0, .0, .01, .8
+
+
+
+
+Strings:
+	Must be able to process as both variables and constants.
+	String concatenation must be allowed for both string variables and constants.
+	
+	Literal - ascii characters enclosed in double quotes (""). An empty string ("") is valid.
+
+
+
+
+Variables (variable identifiers, VIDs):
+	Case sensitive.
+	Must begin with an ascii letter.
+	Composed of letters and digits.
+	Last character may be a '#' (number sign).
+	
+	Can be any length, but only first 8 (not including the # sign) are significant.
+	2 types of VIDs, arithmetic (AVID), and string (SVID)
+	
+	If it begins with i, o, d, or n then the variable is of type integer and is initialized to 0.
+	If it ends with a # then it is a string, the first character is ignored. By default it is initialized to an empty string "".
+	If the variable does not begin with a i, o, d, or n, and does not end in a #, then it is a float and initialized to 0.0
+	
+	The type of a numeric variable type can be changed once in a program. Example:
+		iThink        !< iThink is by default an integer.
+		iThink = 3.5; !< iThink is now a float.
+	
+	In mixed type arithmetic expressions, all values are promoted to floating point.
+
+
+
+

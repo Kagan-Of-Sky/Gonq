@@ -1,0 +1,41 @@
+
+as12, an absolute assembler for Motorola MCU's, version 1.2h
+
+                        ; Big_To_Little_Endian.asm
+                        
+                        ; Author:       Mark Kaganovsky
+                        ; Course:       CST8216 Fall 2015
+                        ; S/N:          040-789-903
+                        ; Date:         3 Nov 2015
+                        
+                        ; Purpose       To convert a big endian array of three 2 byte words into an
+                        ;               array of little endian words.
+                        
+                        ; Data
+1000                                       org      $1000
+1000 10 fe 28 88 aa 55  Source_Array       dw       $10fe, $2888, $aa55
+1020                                       org      $1020
+1020                    Destination_Array  ds.w     3
+                                    
+                        ; Program Code
+2000                                org      $2000
+2000 ff 20 00                       lds      $2000
+                                    
+2003 fc 10 00                       ldd      Source_Array          ; Read in a two byte word
+2006 7b 10 20                       stab     Destination_Array     ; Write low order byte first
+2009 7a 10 21                       staa     Destination_Array+1   ; Write the high order byte next
+                                    
+200c fc 10 02                       ldd      Source_Array+2
+200f 7b 10 22                       stab     Destination_Array+2
+2012 7a 10 23                       staa     Destination_Array+3
+                                    
+2015 fc 10 04                       ldd      Source_Array+4
+2018 7b 10 24                       stab     Destination_Array+4
+201b 7a 10 25                       staa     Destination_Array+5
+                                    
+201e 3f                             swi
+                                    end
+
+Executed: Tue Nov 03 16:27:51 2015
+Total cycles: 54, Total bytes: 37
+Total errors: 0, Total warnings: 0

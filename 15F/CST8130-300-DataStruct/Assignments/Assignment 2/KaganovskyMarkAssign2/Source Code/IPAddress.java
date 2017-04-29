@@ -1,0 +1,200 @@
+import java.lang.reflect.Parameter;
+import java.util.*;
+
+/*****************************************************************************************
+ * class:   IPAddress 
+ * 
+ * Purpose: This class represents the four octets and
+ *          subnet mask of an IP address 
+ * 
+ * Author:  Linda Crane September 2015 
+ *          Mark kaganovsky October 2015 (compareTo() method)
+ * 
+ * 
+ * data members: 
+ *   address - array of four ints for each octet 
+ *   
+ *   subnet  - number of network bits (CIDR notation) 
+ *  
+ * methods: 
+ *   constructor  - initialize with int array [4] and subnet parameters 
+ *   
+ *   initialize   - with object of type IPAddress
+ *   
+ *   readFile     - reads address info from parameter ifstream object 
+ *                  returns boolean whether valid Ip was read 
+ *                  
+ *   readKeyboard - reads valid info from keyboard 
+ *   
+ *   isValid      - returns true/false if IP address is valid
+ *   
+ *   toString     - displays contents to a String (return) 
+ *   
+ *   getNetwork   - returns appropriate network address in IPAddress parameter
+ *   
+ *   isEqual      - bases decision if two objects are on same network (have same network number)
+ ***************************************************************************************/
+
+
+public class IPAddress {
+	protected int[] address = new int[4]; // each of four octets
+	protected int subnet; // number of network bits
+
+	public IPAddress() {
+		for (int i = 0; i < 4; i++)
+			address[i] = 0;
+		subnet = 0;
+	}
+
+	public boolean initialize(int[] add, int sub) {
+		for (int i = 0; i < 4; i++)
+			address[i] = add[i];
+		subnet = sub;
+		return (isValid());
+	}
+
+	public boolean initialize(IPAddress newOne) {
+		for (int i = 0; i < 4; i++)
+			address[i] = newOne.address[i];
+		subnet = newOne.subnet;
+		return (isValid());
+	}
+
+	public boolean readAddress(Scanner inFile) {
+		try {
+			for (int i = 0; i < 4; i++)
+				address[i] = inFile.nextInt();
+			subnet = inFile.nextInt();
+			if (!isValid())
+				return false;
+			else
+				return true;
+		} 
+		catch(InputMismatchException e){
+			return false;
+		}
+		catch (NumberFormatException nfe) {
+			System.out
+					.println("Invalid data....in readAddress of IPAddress class");
+			return false;
+		}
+	}
+
+	public boolean readKeyboard() {
+		Scanner keyboard = new Scanner(System.in);
+		System.out.print("Enter four numbers for the four octets: ");
+		for (int i = 0; i < 4; i++)
+			address[i] = keyboard.nextInt();
+		System.out.print("\nEnter subnet number: ");
+		subnet = keyboard.nextInt();
+		while (!isValid()) {
+			System.out.print("Enter four numbers for the four octets: ");
+			for (int i = 0; i < 4; i++)
+				address[i] = keyboard.nextInt();
+			System.out.print("\nEnter subnet number: ");
+			subnet = keyboard.nextInt();
+		}
+		return true;
+	}
+
+	public boolean isValid() {
+		if (address[0] < 0 || address[0] > 255 || address[1] < 0
+				|| address[1] > 255 || address[2] < 0 || address[2] > 255
+				|| address[3] < 0 || address[3] > 255 || subnet > 32
+				|| subnet < 0)
+			return false;
+		else if (subnet <= 8 && address[0] > 127)
+			return false;
+		else if (subnet <= 16 && address[0] < 128 && address[0] > 191)
+			return false;
+		else if (subnet <= 24 && address[0] < 192 && address[0] > 223)
+			return false;
+		else
+			return true;
+	}
+
+	public String toString() {
+		String out = new String();
+		for (int i = 0; i < 3; i++)
+			out += address[i] + ".";
+		out += address[3];
+		out += "/" + subnet;
+		return out;
+	}
+
+	public IPAddress getNetwork() {
+		IPAddress networkIP = new IPAddress();
+		int maxOctetsToCopy = 0;
+		// figure out how much is network...how much is host I could also do
+		// NaxOctetsToCopy = subnet / 8;
+		if (subnet == 24)
+			maxOctetsToCopy = 3;
+		if (subnet == 16)
+			maxOctetsToCopy = 2;
+		if (subnet == 8)
+			maxOctetsToCopy = 1;
+		// copy Network address
+
+		for (int i = 0; i < maxOctetsToCopy; i++)
+			networkIP.address[i] = address[i];
+		for (int i = maxOctetsToCopy; i < 4; i++)
+			networkIP.address[i] = 0;
+		networkIP.subnet = subnet;
+		return networkIP;
+	}
+
+	public boolean isEqual(IPAddress rhs) {
+		boolean result = true;
+		IPAddress rhsNetwork;
+		rhsNetwork = rhs.getNetwork();
+		IPAddress lhsNetwork;
+		lhsNetwork = getNetwork();
+		for (int i = 0; i < 4; i++)
+			if (rhsNetwork.address[i] != lhsNetwork.address[i])
+				result = false;
+		if (rhsNetwork.subnet != lhsNetwork.subnet)
+			result = false;
+		return result;
+	}
+	
+	
+	/**
+	 * Compares this {@link IPAddress} object to another.                                                                      <br />
+	 * If the subnet of this {@link IPAddress} is larger than the parameter, 1 is returned.                                    <br />
+	 * If the subnet of this {@link IPAddress} is smaller than the parameter, -1 is returned.                                  <br />
+	 * If the subnet of this {@link IPAddress} is equal to the parameter, the two objects 4 octets are compared sequentially.  <br />
+	 * <blockquote>
+	 *     If the 4 octets are the same, 0 is returned.                                           <br />
+	 *     If an octet in this {@link IPAddress} is smaller than the parameters, -1 is returned.  <br />
+	 *     If an octet in this {@link IPAddress} is larger than the parameters, -1 is returned.   <br />
+	 * </blockquote>
+	 * 
+	 * <b>Example: </b>             <br />
+	 * this ip:   192.168.0.1 /24   <br />
+	 * parameter: 192.168.0.2 /24   <br />
+	 * 
+	 * Returns: -1 <br /><br />
+	 * 
+	 * <b>Example: </b>             <br />
+	 * this ip:   192.168.0.0 /24   <br />
+	 * parameter: 192.0.0.0 /8   <br />
+	 * 
+	 * Returns: 1
+	 * 
+	 * @param ip the {@link IPAddress} object to compare this object to.
+	 * @return <b>returns  1:</b> if this IPAddress is larger than the parameter. <br>
+	 *         <b>returns -1:</b> if this IPAddress is smaller than the parameter. <br>
+	 *         <b>returns  0:</b> if this IPAddress is equal to the parameter. <br> 
+	 */
+	public int compareTo(IPAddress ip){
+		for (int i = 0; i < address.length; i++) {
+			if(this.address[i] > ip.address[i]){
+				return 1;
+			}
+			else if(this.address[i] < ip.address[i]){
+				return -1;
+			}
+		}
+		return 0; //They are equal
+	}
+}

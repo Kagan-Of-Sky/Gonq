@@ -1,0 +1,97 @@
+BE VERY CAREFUL WITH COPY-PASTE!!!!!!!!!
+SEE SVILLEN WHEN GRAMMAR IS TRANSFORMED!
+SEE SVILLEN HELP FOR BONUS!!!!!!!!!!!!!!
+CAN BE LATE 1 WEEK WITH BONUS!!!!!!!!!!!
+
+
+
+
+Predictive Parser:
+	+ Work with only one lookahead token.
+	+ Most languages are like this.
+
+
+
+
+<input statement> -> INPUT(<var_list>)
+
+void input_statement(void){
+	match(lookahead, INPUT);
+	match(lookahead, openBracket);
+	var_list();
+	match();
+}
+
+void arithmetic_expression(void){
+	arithmetic_expression();
+	match(t);
+}
+
+
+
+
+
+
+
+
+E -> E + T | E - T | T
+
+a1 = alpha 1
+a2 = alpha 2
+
+A -> Aa1   | Aa2   | b
+
+A' -> a1A' | a2A' | empty
+
+E -> TE'
+
+E' -> +TE' | -TE' | empty
+
+if(lookahead == + ){
+	match(+); T(); E'();
+}
+else if(lookahead == -){
+	...
+}
+
+T -> Ft'
+
+T -> *FT' | /FT' | empty
+
+A -> Aa1 | Aa2 | ... | Aan | B1 | ... | Bn
+
+ELR
+
+A -> b1A' | B2A' | ... | BmA'
+
+
+
+
+
+<output statement> ->
+	  OUTPUT(<opt variable list);
+	| OUTPUT(STR_T);
+
+
+A -> Pa1 | Pa2
+
+LFG (Left factoring grammar)
+
+A -> PA'
+
+A' -> a1 | a2
+
+
+
+
+General Case:
+
+A -> Pa1 | ... | Pan | B1 | ... | Bn
+
+A -> PA' | B1 | ... | Bn
+
+A' -> a1 | ... | an
+
+O -> OUTPUT(<opt var list>);
+
+<opt var list> -> <opt var list> | STL

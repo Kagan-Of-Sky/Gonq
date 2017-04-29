@@ -1,0 +1,10 @@
+Preparation for the Final Exam.
+Use the time dedicated to the hybrid activities to review all previous hybrid activities. A lot of final exam questions will come from these materials.
+
+Also, if you have some curiosity left visit the links below and try SQLite. It is on every mobile device now.
+
+Tutorials
+http://www.tutorialspoint.com/sqlite/sqlite_java.htm
+http://www.tutorialspoint.com/jdbc/jdbc-quick-guide.htm
+Driver
+https://bitbucket.org/xerial/sqlite-jdbc/downloads

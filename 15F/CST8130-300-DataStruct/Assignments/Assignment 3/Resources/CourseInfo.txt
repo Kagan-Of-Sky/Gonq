@@ -1,0 +1,6 @@
+DataStructures 5
+HybridActivities 5.0 5 HA1 20  HA2 5  HA3 5 HA4 5 HA5 5 
+Labs 10.0 5 Lab1 5 Lab2 5 Lab3 5 Lab4 5 Lab5 5 
+Assignments 25 5 Assign1 20 Assign2 20 Assign3 20 Assign4 20 Assign5 20 
+Midterms/Tests 30.0  3 Midterm1 30 Midterm2 10 LabTest 10 
+FinalExam  30 1 Exam 30 

@@ -1,0 +1,111 @@
+
+// Link.h
+#ifndef LINK_H
+#define LINK_H
+
+struct Link
+{	
+	Player* pPlayer;
+	Link* pNext;
+	Link* pPrev;
+	Link()
+	{
+		pPrev = nullptr;
+		pNext = nullptr;
+	}
+	Link(Link*, Link*, Player*);
+	~Link();
+};
+
+#endif
+
+
+// Player.h
+#ifndef PLAYER_H
+#define PLAYER_H
+
+class Player
+{
+private:
+	char* firstName;
+	char* lastName;
+	double  subscription;
+	int p;
+public:
+
+	Player();
+	Player(char*, char*, double, int);
+	Player(Player&); 
+	~Player();
+	void Print();
+	bool operator==(Player&);
+};
+
+#endif
+
+// SoccerClub.h
+#ifndef SOCCER_H
+#define SOCCER_H
+
+class SoccerClub
+{
+	Link* pPlayers;
+public:
+	SoccerClub();
+	~SoccerClub();
+	void AddPlayer();
+	void DeletePlayer();
+	void PrintPlayersForward();
+	void PrintPlayersReverse();
+	void FindPlayer();
+	Player* operator[](unsigned int);
+	friend ostream& operator<<(ostream&, SoccerClub&);
+};
+
+#endif
+
+
+// ass2.cpp
+void Print(Player p)
+{
+	p.Print();
+}
+
+int main()
+{
+	SoccerClub sc;
+	bool RUNNING = true;
+	char response;
+	int index;
+	
+	while (RUNNING)
+	{
+		cout<<"\nPlease select an option:"<<endl;
+		cout<<"1. Add a Player"<<endl;
+		cout<<"2. Delete a Player"<<endl;
+		cout<<"3. Print out a particular Player"<<endl;
+		cout<<"4. Print out Players"<<endl;
+		cout<<"5. Print out Players in reverse order"<<endl;
+		cout<<"6. Find a Player for a particular position"<<endl;
+		cout<<"q. Quit"<<endl;
+		cout<<"CHOICE: ";
+		cin>>response;
+
+		switch (response)
+		{
+		case '1':sc.AddPlayer(); break;
+		case '2':sc.DeletePlayer(); break;
+		case '3':
+			cout << "please enter the player index: ";
+			cin >> index;
+			sc[index] != nullptr ? Print(*(sc[index])) : cout << "Invalid Index"<<endl;
+			break;
+		case '4':cout<<sc; break;
+		case '5':sc.PrintPlayersReverse(); break;
+		case '6':sc.FindPlayer(); break;
+		case 'q': return 0;
+		default:cout<<"Please enter a valid option\n";
+		}
+		cout<<"\n";
+	}
+}

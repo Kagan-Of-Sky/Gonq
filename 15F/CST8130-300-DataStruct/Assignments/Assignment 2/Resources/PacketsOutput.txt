@@ -1,0 +1,116 @@
+Enter number of entries maximum for array: 30
+
+
+Enter name of file to process: c:\packets.txt
+Adding entry to routing table233.197.123.0\24
+Adding entry to routing table157.87.55.0\24
+Adding entry to routing table219.224.84.0\24
+Adding entry to routing table181.168.117.0\24
+Adding entry to routing table178.159.81.0\24
+Adding entry to routing table154.255.38.0\24
+Adding entry to routing table203.212.235.0\24
+Adding entry to routing table41.248.71.0\24
+Entry is already in the routing table181.168.117.0\24
+Entry is already in the routing table178.159.81.0\24
+Adding entry to routing table74.212.50.0\24
+Adding entry to routing table109.255.120.0\24
+Adding entry to routing table252.248.23.0\24
+Adding entry to routing table78.62.21.0\24
+Adding entry to routing table173.114.13.0\24
+Adding entry to routing table214.217.174.0\24
+Adding entry to routing table124.221.60.0\24
+Adding entry to routing table198.140.14.0\24
+Adding entry to routing table204.23.0.0\16
+Adding entry to routing table30.84.62.0\24
+Adding entry to routing table62.61.46.0\24
+Entry is already in the routing table233.197.123.0\24
+Entry is already in the routing table157.87.55.0\24
+Entry is already in the routing table219.224.84.0\24
+Entry is already in the routing table181.168.117.0\24
+Entry is already in the routing table178.159.81.0\24
+Entry is already in the routing table74.212.50.0\24
+Entry is already in the routing table109.255.120.0\24
+Entry is already in the routing table252.248.23.0\24
+Sending packet out e5  78.62.21.0\24
+Sending packet out e0  173.114.13.0\24
+Sending packet out e1  214.217.174.0\24
+Sending packet out e0  124.221.60.0\24
+Sending packet out e0  198.140.14.0\24
+Adding entry to routing table204.23.15.0\24
+Entry is already in the routing table30.84.62.0\24
+Entry is already in the routing table62.61.46.0\24
+Adding entry to routing table33.111.134.0\24
+dropping packet....177.172.129.0\24
+dropping packet....78.90.111.0\24
+dropping packet....72.2.51.0\24
+dropping packet....103.209.195.0\24
+dropping packet....100.26.171.0\24
+dropping packet....109.210.0.0\16
+Adding entry to routing table164.18.148.0\24
+Adding entry to routing table160.153.14.0\24
+Adding entry to routing table5.71.213.0\24
+Adding entry to routing table131.163.216.0\24
+Adding entry to routing table90.87.153.0\24
+Adding entry to routing table213.175.175.0\24
+dropping packet....80.29.71.0\24
+dropping packet....153.183.159.0\24
+dropping packet....112.183.137.0\24
+Adding entry to routing table14.251.238.0\24
+Adding entry to routing table155.131.72.0\24
+Sending packet out e0  14.251.238.0\24
+Sending packet out e0  155.131.72.0\24
+dropping packet....181.245.39.0\24
+dropping packet....240.28.174.0\24
+Adding entry to routing table81.100.19.0\24
+Adding entry to routing table210.96.34.0\24
+Table is full.........cannot add 210.96.34.0\24
+Adding entry to routing table226.69.186.0\24
+Table is full.........cannot add 226.69.186.0\24
+Adding entry to routing table225.109.78.0\24
+Table is full.........cannot add 225.109.78.0\24
+Adding entry to routing table168.213.101.0\24
+Table is full.........cannot add 168.213.101.0\24
+Adding entry to routing table255.158.27.0\24
+Table is full.........cannot add 255.158.27.0\24
+Adding entry to routing table225.109.78.0\24
+Table is full.........cannot add 225.109.78.0\24
+Adding entry to routing table168.213.101.0\24
+Table is full.........cannot add 168.213.101.0\24
+Adding entry to routing table255.158.27.0\24
+Table is full.........cannot add 255.158.27.0\24
+dropping packet....225.109.78.0\24
+dropping packet....168.213.101.0\24
+dropping packet....255.158.27.0\24
+
+Routing table...
+
+233.197.123.0\24 Port: e0
+157.87.55.0\24 Port: e1
+219.224.84.0\24 Port: e0
+181.168.117.0\24 Port: e4
+178.159.81.0\24 Port: e0
+154.255.38.0\24 Port: e0
+203.212.235.0\24 Port: e1
+41.248.71.0\24 Port: e0
+74.212.50.0\24 Port: e2
+109.255.120.0\24 Port: e0
+252.248.23.0\24 Port: e0
+78.62.21.0\24 Port: e5
+173.114.13.0\24 Port: e0
+214.217.174.0\24 Port: e1
+124.221.60.0\24 Port: e0
+198.140.14.0\24 Port: e0
+204.23.0.0\16 Port: e2
+30.84.62.0\24 Port: fa0
+62.61.46.0\24 Port: e0
+204.23.15.0\24 Port: e5
+33.111.134.0\24 Port: e6
+164.18.148.0\24 Port: e0
+160.153.14.0\24 Port: e0
+5.71.213.0\24 Port: e0
+131.163.216.0\24 Port: e8
+90.87.153.0\24 Port: e9
+213.175.175.0\24 Port: e4
+14.251.238.0\24 Port: e0
+155.131.72.0\24 Port: e0
+81.100.19.0\24 Port: f0

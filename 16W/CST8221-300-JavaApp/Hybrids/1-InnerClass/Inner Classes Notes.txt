@@ -1,0 +1,40 @@
+Types of Inner Classes:
+
+1. Inside of a class
+2. Inside of a method
+3. Anonymous
+
+
+
+
+1. Inside of a class
+	class OuterClass {
+		private int outerClassVariable;
+		
+		class InnerClass{
+			public void accessVariables(){
+				// This class can access all OuterClass data as follows:
+				doSomething();
+				outerClassVariable = 1;
+			}
+		}
+		
+		public void doSomething(){
+			// Code
+		}
+	}
+
+
+
+
+2. Inside of a method
+	class OuterClass {
+	
+		public void doSomething(){
+			class InnerMethodClass { // This class is local to this method.
+				// This class is local to this method.
+				// It can not access the methods variables, but it can access the outer classes variables and methods.
+			}
+		}
+	
+	}

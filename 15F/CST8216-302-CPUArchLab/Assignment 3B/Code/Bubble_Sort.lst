@@ -1,0 +1,82 @@
+
+as12, an absolute assembler for Motorola MCU's, version 1.2h
+
+                        ; Bubble_Sort.asm
+                        
+                        ; Author:       Mark Kaganovsky
+                        ; Course:       CST8216 Fall 2015
+                        ; S/N:          040-789-903
+                        ; Date:         25 Nov 2015
+                        
+                        ; Purpose       To sort a copy of an array in memory using the bubble sort algorithm.
+                        ;               Creates a copy of the source array right after the destination array.
+                        ;               Sorts the copy array using the bubble sort algorithm.
+                        
+                        ; Program Constants
+2000                    STACK              equ     $2000
+                        
+                        ; Program data
+1000                                       org     $1000
+1000                    Source_Array
+                        #include "Bubble_Sort_Array.txt"                          ; Load the array
+                        ; Bubble_Sort_Array.txt
+                        ; Assignment 3B - Task 2
+1000 ff fe 03 04 80 01          db      $FF, $FE, $03, $04, $80, $01, $FE, $02, $00
+     fe 02 00
+                        #endinclude
+
+                        
+1009                    Destination_Array
+1009                                       ds      Destination_Array-Source_Array ; Storage for copy array
+1012                    End_Dest_Array
+                        
+                        ; Code starts
+2000                                       org     $2000
+2000 cf 20 00                              lds     #STACK
+                                           
+2003 ce 10 00                              ldx     #Source_Array
+2006 cd 10 09                              ldy     #Destination_Array
+                        
+                        ; Make a copy of the source array into the destination array.
+2009 a6 30              Copy_Source_Array  ldaa    1,x+
+200b 6a 70                                 staa    1,y+
+200d 8e 10 09                              cpx     #Destination_Array
+2010 26 f7                                 bne     Copy_Source_Array
+                        
+                        ; Bubble sort the destination array.
+2012 ce 10 12                              ldx     #End_Dest_Array
+                        
+2015                    Outer_Loop                                         ; for(x=arrayLength; x>0; x--)
+2015 09                                    dex
+2016 8e 10 09                              cpx     #Destination_Array
+2019 23 1f                                 bls     End_Loop
+201b 34                                    pshx
+                                           
+201c cd 10 09                              ldy     #Destination_Array
+201f                    Inner_Loop                                         ; for(y=0; y<x-1; y++)
+201f a6 40                                 ldaa    0,y
+2021 02                                    iny
+2022 a1 40                                 cmpa    0,y
+2024 22 02                                 bhi     Swap                    ; if array[y-1] > array[y]
+2026 20 08                                 bra     After_Swap              ; else
+                                           
+2028                    Swap                                               ; swap array[y-1] and array[y]
+2028 e6 40                                 ldab    0,y
+202a 6a 40                                 staa    0,y
+202c 03                                    dey
+202d 6b 40                                 stab    0,y
+202f 02                                    iny
+                                           
+2030                    After_Swap
+2030 ad 80                                 cpy     0,sp
+2032 25 eb                                 blo     Inner_Loop              ; y < x, continue inner loop
+2034 1b 81                                 ins
+2036 1b 81                                 ins                             ; Clear the stack
+2038 20 db                                 bra     Outer_Loop              ; y >= x, break out of inner loop
+203a                    End_Loop
+                        
+                                           end
+
+Executed: Wed Nov 18 13:23:36 2015
+Total cycles: 55, Total bytes: 67
+Total errors: 0, Total warnings: 0

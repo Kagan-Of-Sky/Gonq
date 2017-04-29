@@ -1,0 +1,163 @@
+// In ClubMember.h
+#ifndef CLUBMEMBER_H
+#define CLUBMEMBER_H
+
+class ClubMember{
+	char* firstName;
+	char* lastName;
+	double  subscription;
+public:
+	ClubMember();	
+	ClubMember(char*,char*,double);
+	ClubMember(ClubMember&);
+	virtual~ClubMember();
+	virtual void Output()=0;	
+};
+#endif
+
+
+
+
+// In Player.h
+#ifndef PLAYER_H
+#define PLAYER_H
+
+class Player:public ClubMember
+{
+	int p;
+public:
+	Player();
+	Player(char*, char*, double, int);
+	Player(Player&); //copy constructor
+	~Player();
+	bool operator==(Player&);
+	void Output();
+};
+
+#endif
+
+
+
+
+// In Supporter.h
+#ifndef SUPPORTER_H
+#define SUPPORTER_H
+
+struct Date{
+	unsigned int day;
+	unsigned int month;
+	unsigned int year;
+};
+
+class Supporter:public ClubMember{
+
+	Date* fixtures;
+	unsigned int numFixtures;
+public:
+	Supporter();
+	Supporter(char*, char*, double, Date*,unsigned int);
+	Supporter(Supporter&); //copy constructor
+	~Supporter();
+	void Output();
+};
+
+#endif
+
+
+
+
+// In Link.h
+#ifndef LINK_H
+#define LINK_H
+
+struct Link
+{	
+	ClubMember* pClubMember;
+	Link* pNext;
+	Link* pPrev;
+	Link()
+	{
+		pPrev = nullptr;
+		pNext = nullptr;
+	}
+	Link(Link*, Link*, ClubMember*);
+	~Link();
+};
+
+#endif
+
+
+
+
+// In SoccerClub.h
+#ifndef SOCCER_H
+#define SOCCER_H
+
+class SoccerClub
+{
+	struct Link* pClubMembers;
+public:
+	SoccerClub();
+	~SoccerClub();
+	void AddClubMember();
+	void DeleteClubMember();
+	void OutputClubMembersForward();
+	void OutputClubMembersReverse();
+	void FindPlayer();
+	ClubMember* operator[](unsigned int);
+	friend ostream& operator<<(ostream&, SoccerClub&);
+};
+
+#endif
+
+
+
+
+// In ass3.cpp
+#include "ClubMember.h"
+#include "Supporter.h"
+#include "Player.h"
+#include "Link.h"
+#include "SoccerClub.h"
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	SoccerClub sc;
+	bool RUNNING = true;
+	char response;
+	int index;
+
+	while (RUNNING)
+	{
+		cout<<"\nPlease select an option:"<<endl;
+		cout<<"1. Add a ClubMember"<<endl;
+		cout<<"2. Delete a ClubMember"<<endl;
+		cout<<"3. Print out a particular ClubMember"<<endl;
+		cout<<"4. Print out ClubMembers"<<endl;
+		cout<<"5. Print out ClubMembers in reverse order"<<endl;
+		cout<<"6. Find a Player for a particular position"<<endl;
+		cout<<"q. Quit"<<endl;
+		cout<<"CHOICE: ";
+		cin>>response;
+
+		switch (response)
+		{
+		case '1':sc.AddClubMember(); break;
+		case '2':sc.DeleteClubMember(); break;
+		case '3':
+			cout << "please enter the player index: ";
+			cin >> index;
+			sc[index] != nullptr ? sc[index]->Output() : cout << "Invalid Index"<<endl;
+			break;
+		case '4':cout<<sc; break;
+		case '5':sc.OutputClubMembersReverse(); break;
+		case '6':sc.FindPlayer(); break;
+		case 'q': return 0;
+		default:cout<<"Please enter a valid option\n";
+		}
+		cout<<"\n";
+	}
+}

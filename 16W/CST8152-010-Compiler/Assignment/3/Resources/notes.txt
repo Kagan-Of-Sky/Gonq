@@ -1,0 +1,13 @@
+Symbol Table
+
+Made up of 2 parts:
+	+ Symbol Table Manager (STM):   Provides service functions to manipulate the STDB.
+	+ Symbol Table Database (STDB): Repository for VID attributes.
+
+VID: Made up of 5 attributes.
+	+ Variable name
+	+ Type
+	+ Initial value
+	+ Line number
+	+ One reservered
+

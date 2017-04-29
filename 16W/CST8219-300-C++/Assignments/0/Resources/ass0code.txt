@@ -1,0 +1,52 @@
+enum{ RUNNING = 1 };
+struct Player
+{
+	double  subscription;          
+	char* firstName;              
+    	char* lastName;                
+};
+
+struct Link
+{ 
+	struct Player* pPlayer;       
+	struct Link* pNext;          // Link to next object
+   	 struct Link* pPrev;          // Link to previous object
+};
+
+
+void AddPlayer();
+void DeletePlayer();
+void PrintPlayersForward();
+void PrintPlayersReverse();
+void CleanUp();
+
+struct Link*	g_pPlayers = 0; 
+
+int main()
+{	
+	char response  ;
+ 
+	while(RUNNING)
+	{
+		printf("\nPlease select an option:\n");
+		printf("1. Add a Player\n");
+		printf("2. Delete a Player\n");
+		printf("3. Print out Players\n");
+		printf("4. Print out Players in reverse order\n");
+		printf("q. Quit\n");
+		printf("CHOICE: ");
+		fflush(stdin);
+		scanf("%c",&response);
+
+		switch(response)
+		{
+			case '1':AddPlayer();break;
+			case '2':DeletePlayer();break;
+			case '3':PrintPlayersForward();break;
+			case '4':PrintPlayersReverse();break;
+			case 'q':CleanUp();return 0;
+			default:printf("Please enter a valid option\n");
+		}
+		printf("\n");
+	}
+}

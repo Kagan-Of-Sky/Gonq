@@ -1,0 +1,33 @@
+
+as12, an absolute assembler for Motorola MCU's, version 1.2h
+
+                        ; Program data
+1000                                       org     $1000
+1000 ff fe              Array              db      $FF, $FE
+                        
+                        ; Code starts
+2000                                       org     $2000
+2000 ce 10 00                              ldx     #Array
+2003 a6 30                                 ldaa    1,x+
+2005 18 19 30                              mina    1,x+
+                                           
+2008 2d 0c                                 blt     A_LESS
+200a 27 06                                 beq     A_EQUAL
+200c 2e 00                                 bgt     A_GREATER
+                        
+200e 86 01              A_GREATER          ldaa    #1
+2010 20 08                                 bra     END_
+                                           
+2012 86 00              A_EQUAL            ldaa    #0
+2014 20 04                                 bra     END_
+                                           
+2016 86 02              A_LESS             ldaa    #2
+2018 20 00                                 bra     END_
+                                           
+201a                    END_
+201a 3f                                    swi
+                                           end
+
+Executed: Sun Nov 15 14:49:16 2015
+Total cycles: 46, Total bytes: 29
+Total errors: 0, Total warnings: 0

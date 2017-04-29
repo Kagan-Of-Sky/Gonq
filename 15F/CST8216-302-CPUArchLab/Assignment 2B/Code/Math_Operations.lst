@@ -1,0 +1,48 @@
+
+as12, an absolute assembler for Motorola MCU's, version 1.2h
+
+                        ; Math_Operations.asm
+                        ;
+                        ; Author:           D. Haley, Mark Kaganovsky
+                        ; Student Number:   040-789-903
+                        ; Date:             20 Oct 2015
+                        ;
+                        ; Purpose:          To Gain Experience with Assembly Language instructions.
+                        
+                        
+                        
+                        
+                        ; Program Constants.
+2000                    STACK     equ     $2000
+                        
+                        
+                        
+                        
+                        ; Program data.
+1000                              org     $1000       ; Data starts at $1000.
+1000 0c 81              MyArray   db      $0C, $81    ; Define 2 bytes
+1002                    Result    ds      2           ; Two bytes of storage.
+                        
+                        
+                        
+                        
+                        ; Program instructions.
+2000                              org     $2000       ; Program Code starts at $2000.
+2000 cf 20 00           Start     lds     #STACK      ; Setup the stack.
+                        
+2003 86 25                        ldaa    #$25        ; Load accumulator a with the value 0x25 (37).
+2005 c6 19                        ldab    #25         ; Load accumulator b with the value 25.
+2007 bb 10 00                     adda    MyArray     ;
+200a 7a 10 02                     staa    Result      ;
+200d 7b 10 03                     stab    Result+1    ;
+2010 b6 10 03                     ldaa    Result+1    ;
+2013 f6 10 02                     ldab    Result      ;
+2016 52                           incb                ; Increment accumulator b.
+2017 86 aa                        ldaa    #%10101010  ; Load accumulator a with the decimal value 170.
+2019 7c 10 02                     std     Result      ; Store the contents of accumulator d into memory.
+201c 3f                           swi                 ; (S)oft(W)are (I)nterrupt.
+                                  end
+
+Executed: Tue Oct 20 16:32:18 2015
+Total cycles: 47, Total bytes: 31
+Total errors: 0, Total warnings: 0

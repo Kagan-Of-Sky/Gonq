@@ -1,0 +1,2 @@
+Installing OpenGL ------ http://kiwwito.com/installing-opengl-glut-libraries-in-ubuntu/
+Getting Started -------- https://www.opengl.org/wiki/Getting_Started

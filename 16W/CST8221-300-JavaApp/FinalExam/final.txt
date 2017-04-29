@@ -1,0 +1,10 @@
+Deadlocks: Important
+
+Create thread, what run method is doing.
+
+What invokeLater() does.
+
+All GUI changing code should be put in invokeLater().
+
+Networking basic questions.
+

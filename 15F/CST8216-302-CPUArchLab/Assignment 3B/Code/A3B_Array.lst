@@ -1,0 +1,55 @@
+
+as12, an absolute assembler for Motorola MCU's, version 1.2h
+
+                        ; A3B_Array.asm
+                        
+                        ; Author:       Mark Kaganovsky
+                        ; Course:       CST8216 Fall 2015
+                        ; S/N:          040-789-903
+                        ; Date:         25 Nov 2015
+                        
+                        ; Purpose       To copy an array backwards into memory, summing up every value
+                        ;               as it iterates through the array, and storing it after the copy
+                        ;               array.
+                        
+                        ; Program Constants
+2000                    STACK              equ     $2000
+                        
+                        ; Program data
+1000                                       org     $1000
+1000                    Source_Array
+1000 06 55 2c 7a 07                        db      $06, $55, $2C, $7A, $07
+1005                    Destination_Array  ds      Destination_Array-Source_Array ; auto calculate
+                                                                                  ; Array Size
+100a                    Additions          ds.w    1                              ; store 16 bit
+                                                                                  ; additions here
+                        ; Code starts
+2000                                       org    $2000
+2000 cf 20 00                              lds    #STACK
+                                           
+2003 ce 10 04                              ldx    #Destination_Array-1 ; x -> last entry in source array
+2006 cd 10 05                              ldy    #Destination_Array   ; y -> first entry in dest. array
+                                           
+2009 cc 00 00                              ldd    #0
+200c 7c 10 0a                              std    Additions            ; Zero out Additions memory
+                                           
+200f                    Start
+200f e6 3f                                 ldab   1,x-                 ; Load byte from source array
+2011 6b 70                                 stab   1,y+                 ; Store byte in destinaion array
+2013 87                                    clra                        ; Clear A so msb of d is zero
+2014 3b                                    pshd
+2015 fc 10 0a                              ldd    Additions            ; Get the previous sum
+2018 e3 80                                 addd   0,sp                 ; Add previous sum to current byte
+201a 7c 10 0a                              std    Additions
+201d 1b 81                                 ins
+201f 1b 81                                 ins                         ; 'pop' the stack
+2021 8e 0f ff                              cpx    #Source_Array-1
+2024 26 e9                                 bne    Start
+                        
+2026 3f                                    swi
+                                           end
+                                           
+
+Executed: Tue Nov 17 19:33:18 2015
+Total cycles: 50, Total bytes: 44
+Total errors: 0, Total warnings: 0

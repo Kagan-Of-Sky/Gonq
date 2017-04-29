@@ -1,0 +1,163 @@
+Hybrid 1:
+Q1. Can an inner class method have access to the fields of the enclosing class?
+	Yes
+
+Q2. Can an anonymous inner class have a constructor?
+	No
+
+Q3. Can a local class have access to non-final local variables?
+	It can read them but not write them.
+
+
+
+
+Hybrid 2:
+Q1. Can a JPanel contain another JPanel?
+	Yes
+
+Q2. Can a JPanel contain JFrame?
+	No
+
+Q3. Which Swing frame pane allows you to place components "above" any other components?
+	Glass Pane
+
+Q4. How are the built-in layout containers called in JavaFX?
+	SomethingPane - They are a layout and panel combined.
+
+
+
+
+Hybrid 3:
+Q1. What is the default layout manager of JPanel?
+	Flow Layout.
+
+Q2. Can you change the layout manager of a container once the container is created?
+	Yes
+
+Q3. Can developers create their own layout managers?
+	Yes
+
+Q4. Does JavaFX provide predefined layout managers?
+	Yes
+
+
+
+
+Hybrid 4:
+Q1. Can you prevent typing text in a JTextField ?
+	Yes
+
+Q2. Can you enter more than one line in a JTextField?
+	No
+
+Q3. Can you use basic editing operations when entering text in JTextField or JTextArea?
+	Yes, ctrl+c, ctrl+p, ctrl+x, but no context menu.
+
+Q4. Does JavaFX provide similar text controls?
+	Yes
+
+
+
+
+Hybrid 5:
+Q1. Are all dialogs created by JOptionPane modal?
+	Yes
+
+Q2. Can you have more than one value returned by the Input Dialogs?
+	No NOT SURE?????????
+
+Q3. Do you need a parent frame in order to create a dialog?
+	Yes, if you specify null, then one is created for you.
+
+Q4. Does JavaFX currently provide a standard dialog API?
+	Yes, starting with Java 1.8.40, Alert, Dialog, TextInputDialog, ChoiceDialog.
+
+Q5. Are the standard JavaFX dialogs modal?
+	They could be modal.
+
+
+
+
+Hybrid 6:
+Q1. Can you change the appearance of a progress bar?
+	Yes, use UIManager.put("ProgressBar.background", Color.DARK_GRAY);
+
+Q2. Can you change the text of the Cancel button of the progress monitor?
+	Yes, use UIManager.put("OptionPane.cancelButtonText", "NEW TEXT");
+
+Q3. Can you reuse a progress monitor?
+	No you can not, if you intend to reuse a progress bar, use ProgressBar.
+
+Q4. Can a progress bar show work without measurable progress?
+	Yes, use JProgressBar.setIndeterminate(true);
+
+Q5. Does JavaFX provide a ProgressMonitor control?
+	No, similiar is ProgressBar and ProgressIndicator.
+
+
+
+
+Hybrid 7:
+Q1. Can you filter the type of the files displayed in the file chooser dialog box?
+	Yes.
+
+Q2. Can you select multiple files?
+	Yes.
+
+Q3. Can you select a directory?
+	Yes.
+
+Q4. Does JavaFX provide similar components? If yes, do they provide the same functionality?
+	Yes, and yes.
+
+
+
+
+Hybrid 9:
+Q1. Can multiple threads which are not sharing common resources create a deadlock?
+	No.
+
+Q2. Can a deadlock be prevented by using the Java synchronized primitive?
+	No.
+
+
+
+
+Hybrid 11:
+Q1. Is Swing thread-safe?
+	No
+
+Q2. Does the invokeLater() method create a new thread?
+	No
+
+Q3. Does the invokeLater() method return immediately or does it wait for run() to complete?
+	Returns immediately.
+
+Q4. Is JavaFX thread-safe?
+	No, use Platform.runLater().
+
+
+
+
+Hybrid 12:
+Q1. How many bytes is the TCP/IP address with IPv6?
+	(20 bytes for tcp)  +  (40 bytes for ipv6)  =  60 bytes
+
+Q2. How many port numbers are available on a machine?
+	65536
+
+Q3. Is TCP a connection-oriented protocol?
+	Yes
+
+
+
+
+Hybrid 13:
+Q1. Does the thread establishing the connection block until the connection is established?
+	No
+
+Q2. Can you interrupt a blocked thread?
+	No
+
+Q3. Does a channel have associated streams?
+	Yes
